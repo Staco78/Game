@@ -9,7 +9,7 @@ public class Player {
     Vec2<Integer> pos = new Vec2<>(0, 0);
     Renderer renderer;
     Texture texture;
-    TexturedRect rect = new TexturedRect(0, 0, 100, 100);
+    TexturedRect rect = new TexturedRect(0, 100, 500, 500);
 
 
     public Player(Renderer renderer) {

@@ -2,6 +2,7 @@ package Game.renderer;
 
 import Game.player.Player;
 import Game.renderer.textures.Textures;
+import org.joml.Matrix4f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
@@ -15,6 +16,8 @@ public class Renderer {
     private final Window window;
     public final Textures textures = new Textures();
     private Shader shader = null;
+
+    private final Matrix4f projection = new Matrix4f().ortho(0, 500, 500, 0, -1, 1);
 
     public Renderer() {
 
@@ -54,6 +57,9 @@ public class Renderer {
 
     public void startRendering() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        shader.set("projection", projection);
+        shader.use();
+
 
     }
 
@@ -65,6 +71,7 @@ public class Renderer {
 
     public void draw(Player player) {
         shader.use();
+        shader.set("model", player.getRect().getModel());
         player.getRect().bind();
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }

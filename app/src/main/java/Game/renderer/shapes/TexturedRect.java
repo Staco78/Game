@@ -14,7 +14,7 @@ public class TexturedRect {
     public float height;
     VAO vao;
     VBO vbo;
-    private Matrix4f model = new Matrix4f();
+    private final Matrix4f model = new Matrix4f();
 
 
     public TexturedRect(float x, float y, float width, float height) {
@@ -33,12 +33,13 @@ public class TexturedRect {
 
         model.translate(x, y, 0);
         model.translate(0.5f * width, 0.5f * height, 0);
-        model.scale(width, height, 1.0f);
+        model.scale(0.5f * width, 0.5f * -height, 1.0f);
 
-        updateBuffer();
+
+        createBuffer();
     }
 
-    public void updateBuffer() {
+    private void createBuffer() {
         vao = new VAO();
         vao.bind();
         vbo = new VBO(24);
