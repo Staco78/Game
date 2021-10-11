@@ -17,6 +17,14 @@ application {
 
 }
 
+jar {
+    manifest {
+        attributes(
+//                'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+                'Main-Class': 'Game.App'
+        )
+    }
+}
 
 project.ext.lwjglVersion = "3.2.3"
 project.ext.lwjglNatives = "natives-windows"

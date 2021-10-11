@@ -2,25 +2,15 @@ package Game.player;
 
 import Game.common.InputManager;
 import Game.common.Vec2;
-import Game.renderer.shapes.TexturedRect;
+import Game.entity.Entity;
 import Game.renderer.Renderer;
-import Game.renderer.textures.Texture;
 import org.lwjgl.glfw.GLFW;
 
-public class Player {
-    Vec2<Double> pos = new Vec2<>(0.0, 0.0);
-    Renderer renderer;
-    Texture texture;
-    TexturedRect rect = new TexturedRect(this.pos.x, this.pos.y, 100, 100);
+public class Player extends Entity {
 
 
     public Player(Renderer renderer) {
-        this.renderer = renderer;
-        this.texture = this.renderer.textures.get("player");
-    }
-
-    public void draw() {
-        this.renderer.draw(this);
+        super(renderer, renderer.textures.get("player"), new Vec2<>(0.0, 0.0), new Vec2<>(100.0, 100.0));
     }
 
     public void tick(double deltaTime) {
@@ -43,13 +33,5 @@ public class Player {
         rect.x = this.pos.x;
         rect.y = this.pos.y;
 
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public TexturedRect getRect() {
-        return rect;
     }
 }

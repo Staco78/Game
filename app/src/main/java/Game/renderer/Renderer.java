@@ -1,5 +1,6 @@
 package Game.renderer;
 
+import Game.entity.Entity;
 import Game.player.Player;
 import Game.renderer.textures.Textures;
 import org.joml.Matrix4f;
@@ -39,6 +40,8 @@ public class Renderer {
         glClearColor(0, 0, 1, 1);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glfwSwapInterval(1);
+
 
 
         textures.loadAll();
@@ -71,10 +74,10 @@ public class Renderer {
         glfwPollEvents();
     }
 
-    public void draw(Player player) {
+    public void draw(Entity entity) {
         shader.use();
-        shader.set("model", player.getRect().getModel());
-        player.getRect().bind();
+        shader.set("model", entity.getRect().getModel());
+        entity.getRect().bind();
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 }

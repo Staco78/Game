@@ -9,6 +9,7 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 public class Game {
     private final Renderer renderer = new Renderer();
     private final Player player = new Player(renderer);
+    private final World world = new World(renderer, player);
 
     Game() {
         InputManager.init(renderer.getWindow());
@@ -26,7 +27,7 @@ public class Game {
 
             renderer.startRendering();
 
-            player.draw();
+            world.draw();
             renderer.endRendering();
         }
     }
