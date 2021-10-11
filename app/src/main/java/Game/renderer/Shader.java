@@ -1,5 +1,6 @@
 package Game.renderer;
 
+import org.joml.Matrix4d;
 import org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
@@ -62,6 +63,12 @@ public class Shader {
             throw new AssertionError("Could not compile shader");
         }
         return shader;
+    }
+
+    public void set(String name, Matrix4d matrix) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            glUniformMatrix4fv(glGetUniformLocation(programId, name), false, matrix.get(stack.mallocFloat(16)));
+        }
     }
 
     public void set(String name, Matrix4f matrix) {

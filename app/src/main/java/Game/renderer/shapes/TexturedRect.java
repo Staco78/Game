@@ -8,16 +8,16 @@ import org.joml.*;
 import static org.lwjgl.opengl.GL46.*;
 
 public class TexturedRect {
-    public float x;
-    public float y;
-    public float width;
-    public float height;
+    public double x;
+    public double y;
+    public double width;
+    public double height;
     VAO vao;
     VBO vbo;
-    private final Matrix4f model = new Matrix4f();
+    private final Matrix4d model = new Matrix4d();
 
 
-    public TexturedRect(float x, float y, float width, float height) {
+    public TexturedRect(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -56,7 +56,8 @@ public class TexturedRect {
 
     }
 
-    public Matrix4f getModel() {
+    public Matrix4d getModel() {
+        model.setTranslation(x + 1, y + 1, 1);
         return model;
     }
 
