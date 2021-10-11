@@ -25,7 +25,7 @@ public class Renderer {
 
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (!glfwInit())
-            throw new IllegalStateException("Unable to initialize GLFW");
+            throw new IllegalStateException("Failed to initialize GLFW");
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -37,6 +37,8 @@ public class Renderer {
         GL.createCapabilities();
 
         glClearColor(0, 0, 1, 1);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
         textures.loadAll();
