@@ -17,7 +17,7 @@ public class Renderer {
     public final Textures textures = new Textures();
     private Shader shader = null;
 
-    private final Matrix4f projection = new Matrix4f().ortho(0, 500, 500, 0, -1, 1);
+    private Matrix4f projection = new Matrix4f().ortho(0, 500, 500, 0, -1, 1);
 
     public Renderer() {
 
@@ -33,6 +33,10 @@ public class Renderer {
         window = new Window("Game", 500, 500);
 
         glfwMakeContextCurrent(window.getWindow());
+        GLFWWindowSizeCallback.create((i, x, y) -> {
+            glViewport(0, 0, x, y);
+            projection = new Matrix4f().ortho(0, x, y, 0, -1, 1);
+        }).set(window.getWindow());
 
         GL.createCapabilities();
 
@@ -40,7 +44,6 @@ public class Renderer {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glfwSwapInterval(1);
-
 
 
         textures.loadAll();
