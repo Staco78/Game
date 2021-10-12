@@ -7,6 +7,7 @@ public class Textures {
 
     public void loadAll() {
         textures.put("player", new Texture("player.png"));
+        textures.put("img", new Texture("img.png"));
     }
 
     public Texture get(String name) {

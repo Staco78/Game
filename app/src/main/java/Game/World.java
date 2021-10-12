@@ -17,7 +17,7 @@ public class World {
     public World(Renderer renderer, Player player) {
         this.renderer = renderer;
         entities.add(player);
-        entities.add(new Entity(renderer, renderer.textures.get("player"), new Vec2<>(100.0, 100.0), new Vec2<>(30.0, 30.0)));
+        entities.add(new Entity(renderer, renderer.textures.get("img"), new Vec2<>(100.0, 100.0), new Vec2<>(30.0, 30.0)));
     }
 
     public void draw() {

@@ -25,7 +25,9 @@ public class Entity {
         this.renderer.draw(this);
     }
 
-//    public abstract void tick(double deltaTime);
+    public Texture getTexture() {
+        return texture;
+    }
 
     public TexturedRect getRect() {
         return rect;

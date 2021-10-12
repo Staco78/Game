@@ -24,7 +24,7 @@ public class Texture {
     public int id;
 
     public Texture(String imagePath) {
-        ByteBuffer imageData = null;
+        ByteBuffer imageData;
         try {
             imageData = ioResourceToByteBuffer("textures/" + imagePath, 1024);
         } catch (IOException e) {
@@ -64,14 +64,9 @@ public class Texture {
         }
     }
 
+    public void bind() {
+        glBindTexture(GL_TEXTURE_2D, this.id);
+    }
 
-    /**
-     * Reads the specified resource and returns the raw data as a ByteBuffer.
-     *
-     * @param resource   the resource to read
-     * @param bufferSize the initial buffer size
-     * @return the resource data
-     * @throws IOException if an IO error occurs
-     */
 
 }

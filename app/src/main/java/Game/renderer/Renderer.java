@@ -1,7 +1,6 @@
 package Game.renderer;
 
 import Game.entity.Entity;
-import Game.player.Player;
 import Game.renderer.textures.Textures;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.*;
@@ -77,6 +76,7 @@ public class Renderer {
     public void draw(Entity entity) {
         shader.use();
         shader.set("model", entity.getRect().getModel());
+        entity.getTexture().bind();
         entity.getRect().bind();
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
