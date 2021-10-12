@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL46.*;
 public class TexturedRect {
     public double x;
     public double y;
-    public double width;
-    public double height;
+    public final double width;
+    public final double height;
     VAO vao;
     VBO vbo;
     private final Matrix4d model = new Matrix4d();

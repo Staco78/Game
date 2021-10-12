@@ -15,12 +15,6 @@ public class VBO {
         buff = BufferUtils.createFloatBuffer(size);
         bind();
 
-//        int stride = 0;
-//        for (int i = 0; i < attribSizes.length; i++){
-//            glVertexAttribPointer(i, attribSizes[i], GL_FLOAT, false, stride, 0L);
-//            glEnableVertexAttribArray(i);
-//            stride += attribSizes[i];
-//        }
     }
 
     public void bind() {
@@ -31,7 +25,6 @@ public class VBO {
         buff.put(data);
         return this;
     }
-
 
     public void sendData() {
         bind();

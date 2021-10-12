@@ -11,8 +11,8 @@ import java.util.List;
 
 public class World {
 
-    Renderer renderer;
-    List<Entity> entities = new LinkedList<>();
+    final Renderer renderer;
+    final List<Entity> entities = new LinkedList<>();
 
     public World(Renderer renderer, Player player) {
         this.renderer = renderer;

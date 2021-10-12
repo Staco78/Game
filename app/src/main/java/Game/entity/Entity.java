@@ -6,11 +6,11 @@ import Game.renderer.shapes.TexturedRect;
 import Game.renderer.textures.Texture;
 
 public class Entity {
-    protected Vec2<Double> pos;
-    protected Vec2<Double> size;
-    protected Renderer renderer;
-    protected Texture texture;
-    protected TexturedRect rect;
+    protected final Vec2<Double> pos;
+    protected final Vec2<Double> size;
+    protected final Renderer renderer;
+    protected final Texture texture;
+    protected final TexturedRect rect;
 
 
     public Entity(Renderer renderer, Texture texture, Vec2<Double> pos, Vec2<Double> size) {

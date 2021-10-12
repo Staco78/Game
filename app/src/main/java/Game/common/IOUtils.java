@@ -11,6 +11,7 @@ import java.nio.channels.SeekableByteChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 import static org.lwjgl.BufferUtils.createByteBuffer;
 import static org.lwjgl.system.MemoryUtil.memSlice;
@@ -24,6 +25,7 @@ public class IOUtils {
         return newBuffer;
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
         ByteBuffer buffer;
 
@@ -32,13 +34,12 @@ public class IOUtils {
             try (SeekableByteChannel fc = Files.newByteChannel(path)) {
                 buffer = BufferUtils.createByteBuffer((int) fc.size() + 1);
                 while (fc.read(buffer) != -1) {
-                    ;
                 }
             }
         } else {
             try (
                     InputStream source = Thread.currentThread().getContextClassLoader().getResourceAsStream(resource);
-                    ReadableByteChannel rbc = Channels.newChannel(source)
+                    ReadableByteChannel rbc = Channels.newChannel(Objects.requireNonNull(source))
             ) {
                 buffer = createByteBuffer(bufferSize);
 
