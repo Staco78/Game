@@ -1,7 +1,10 @@
 package Game.renderer;
 
+import Game.Drawable;
 import Game.entity.Entity;
+import Game.player.Camera;
 import Game.renderer.textures.Textures;
+import Game.world.Tile;
 import org.joml.Matrix4f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -16,10 +19,11 @@ public class Renderer {
     private final Window window;
     public final Textures textures = new Textures();
     private Shader shader = null;
+    private Camera camera;
 
-    private Matrix4f projection = new Matrix4f().ortho(0, 500, 500, 0, -1, 1);
+    public Renderer(Camera camera) {
+        this.camera = camera;
 
-    public Renderer() {
 
         GLFWErrorCallback.createPrint(System.err).set();
 
@@ -35,7 +39,7 @@ public class Renderer {
         glfwMakeContextCurrent(window.getWindow());
         GLFWWindowSizeCallback.create((i, x, y) -> {
             glViewport(0, 0, x, y);
-            projection = new Matrix4f().ortho(0, x, y, 0, -1, 1);
+            camera.setSize(x, y);
         }).set(window.getWindow());
 
         GL.createCapabilities();
@@ -64,7 +68,7 @@ public class Renderer {
 
     public void startRendering() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        shader.set("projection", projection);
+        shader.set("projection", camera.getMatrix());
         shader.use();
 
 
@@ -76,11 +80,12 @@ public class Renderer {
         glfwPollEvents();
     }
 
-    public void draw(Entity entity) {
+
+    public void draw(Drawable drawable) {
         shader.use();
-        shader.set("model", entity.getRect().getModel());
-        entity.getTexture().bind();
-        entity.getRect().bind();
+        shader.set("model", drawable.getRect().getModel());
+        drawable.getTexture().bind();
+        drawable.getRect().bind();
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 }

@@ -8,8 +8,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class Player extends Entity {
 
-
-    public Player(Renderer renderer) {
+    public Player(Renderer renderer) throws Exception {
         super(renderer, renderer.textures.get("player"), new Vec2<>(0.0, 0.0), new Vec2<>(100.0, 100.0));
     }
 
@@ -18,7 +17,7 @@ public class Player extends Entity {
     }
 
     protected void updatePos(double deltaTime) {
-        final double speed = 100 * deltaTime;
+        final double speed = 500 * deltaTime;
 
         if (InputManager.isActive(GLFW.GLFW_KEY_D))
             this.pos.x += speed;

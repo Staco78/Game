@@ -1,5 +1,11 @@
 package Game.renderer;
 
+import Game.common.Vec2;
+import org.lwjgl.system.MemoryStack;
+
+import java.nio.IntBuffer;
+
+import static org.lwjgl.system.MemoryStack.stackPush;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -30,4 +36,15 @@ public class Window {
         return !glfwWindowShouldClose(window);
     }
 
+    public Vec2<Integer> getSize() {
+        try (MemoryStack stack = stackPush()) {
+            IntBuffer width = stack.mallocInt(1);
+            IntBuffer height = stack.mallocInt(1);
+
+            glfwGetWindowSize(window, width, height);
+
+            return new Vec2<>(width.get(), width.get());
+        }
+
+    }
 }

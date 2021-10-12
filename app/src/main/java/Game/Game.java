@@ -1,17 +1,21 @@
 package Game;
 
 import Game.common.InputManager;
+import Game.common.Vec2;
+import Game.player.Camera;
 import Game.player.Player;
 import Game.renderer.Renderer;
+import Game.world.World;
 
 import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public class Game {
-    private final Renderer renderer = new Renderer();
+    private final Camera camera = new Camera(new Vec2<>(0, 0));
+    private final Renderer renderer = new Renderer(camera);
     private final Player player = new Player(renderer);
     private final World world = new World(renderer, player);
 
-    Game() {
+    Game() throws Exception {
         InputManager.init(renderer.getWindow());
     }
 
@@ -23,6 +27,7 @@ public class Game {
             lastFrame = currentFrame;
 
             player.tick(deltaTime);
+            camera.setPos(player.getPos().x.floatValue(), player.getPos().y.floatValue());
 
 
             renderer.startRendering();
