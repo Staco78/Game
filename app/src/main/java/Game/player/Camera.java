@@ -8,6 +8,7 @@ public class Camera {
     private float y = 0;
     private int width;
     private int height;
+    private final Matrix4f matrix = new Matrix4f();
 
     public Camera(int width, int height) {
         this.width = width;
@@ -42,7 +43,7 @@ public class Camera {
     }
 
     public Matrix4f getMatrix() {
-        return new Matrix4f().ortho(x - width / 2.0f, x + width / 2.0f, y + height / 2.0f, y - height / 2.0f, -1, 1);
+        return matrix.setOrtho(x - width / 2.0f, x + width / 2.0f, y + height / 2.0f, y - height / 2.0f, -10, 10);
     }
 
 }

@@ -1,11 +1,9 @@
 package Game.renderer;
 
 import Game.Drawable;
-import Game.entity.Entity;
+import Game.common.Vec2;
 import Game.player.Camera;
 import Game.renderer.textures.Textures;
-import Game.world.Tile;
-import org.joml.Matrix4f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 
@@ -18,10 +16,10 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Renderer {
     private final Window window;
     public final Textures textures = new Textures();
-    private Shader shader = null;
-    private Camera camera;
+    private final Shader shader;
+    private final Camera camera;
 
-    public Renderer(Camera camera) {
+    public Renderer(Camera camera) throws IOException {
         this.camera = camera;
 
 
@@ -37,7 +35,7 @@ public class Renderer {
         window = new Window("Game", 500, 500);
 
         glfwMakeContextCurrent(window.getWindow());
-        GLFWWindowSizeCallback.create((i, x, y) -> {
+        GLFWWindowSizeCallback.create((w, x, y) -> {
             glViewport(0, 0, x, y);
             camera.setSize(x, y);
         }).set(window.getWindow());
@@ -52,14 +50,13 @@ public class Renderer {
 
         textures.loadAll();
 
-        try {
-            shader = new Shader("shader.vert", "shader.frag");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        shader = new Shader("shader.vert", "shader.frag");
 
         window.show();
+
+        Vec2<Integer> size = window.getSize();
+        glViewport(0, 0, size.x, size.y);
+        camera.setSize(size.x, size.y);
     }
 
     public Window getWindow() {

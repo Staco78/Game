@@ -41,10 +41,9 @@ public class Window {
             IntBuffer width = stack.mallocInt(1);
             IntBuffer height = stack.mallocInt(1);
 
-            glfwGetWindowSize(window, width, height);
+            glfwGetFramebufferSize(window, width, height);
 
-            return new Vec2<>(width.get(), width.get());
+            return new Vec2<>(width.get(0), width.get(0));
         }
-
     }
 }
